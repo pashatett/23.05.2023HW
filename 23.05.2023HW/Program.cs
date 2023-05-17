@@ -106,15 +106,9 @@ namespace _23._05._2023HW
                 if (i%2==0) Console.Write(i + " ");
             }
         }
-
         static void Main(string[] args)
         {
             task4();
-            Console.ReadKey();
-        }
-        static void Main(string[] args)
-        {
-            task2();
             Console.ReadKey();
         }
     }
