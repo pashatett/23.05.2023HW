@@ -61,24 +61,56 @@ namespace _23._05._2023HW
         {
             string[] date1 = Console.ReadLine().Split('.');
             int[] date = new int[3];
-            int codeCenture=4, codeMonth;
             for(int i = 0; i < 3; i++)
             {
                 date[i] = Convert.ToInt32(date1[i]);
+                if (date[i]/10 == 0) { date[i] = date[i] % 10; }
             }
-            foreach(int i in date)
+
+            int doW;
+            doW = (date[2] / 12) + (date[2] % 12) + ((date[2] % 12) / 4);
+            int[] iiM = { 6, 2, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 };
+            doW += iiM[date[1] - 1];
+            if ((date[2] % 44) == 0)
+            {                              // индекс високосного года
+                if ((date[1] == 1) || (date[1] == 2)) doW--;
+            }
+            doW += date[0];
+            doW = (doW % 7) - 1;
+
+            string[] week = { "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье" };
+            string[] month = { "Зима", "Весна", "Лето", "Осень" };
+
+            Console.WriteLine(week[doW-1]);
+
+            if (date[1] <= 2 || date[1] == 12) Console.WriteLine(month[0]);
+            if (date[1] <= 5  && date[1]>2) Console.WriteLine(month[1]);
+            if (date[1] <= 8 && date[1] > 5) Console.WriteLine(month[2]);
+            if (date[1] <= 11 && date[1] > 8) Console.WriteLine(month[3]);
+        }
+        static void task3()
+        {
+            Console.WriteLine("Введите количество градусов ");
+            float degrees = Convert.ToSingle(Console.ReadLine());
+            Console.WriteLine("Во что перевести? Цельсий(1)/Форенгейт(2)");
+            int answ = Convert.ToInt32(Console.ReadLine());
+            if (answ == 1) Console.WriteLine("По Цельсию это будет равно -> {0}", degrees *0.56 -17.78);
+            if (answ == 2) Console.WriteLine("По Форенгейту это будет равно -> {0}", degrees * 1.8 + 32);
+        }
+        static void task4()
+        {
+            int a = Convert.ToInt32(Console.ReadLine());
+            int b = Convert.ToInt32(Console.ReadLine());
+            for(int i=((a<b)?a:b);i < ((a > b) ? a : b); i++)
             {
-                Console.WriteLine($"{i}");
+                if (i%2==0) Console.Write(i + " ");
             }
+        }
 
-            
-
-            for(int i = 0; i < date[2] / 100; i++)
-            {
-                codeCenture -= 2;
-                if (codeCenture == 0) codeCenture = 6;
-            }
-
+        static void Main(string[] args)
+        {
+            task4();
+            Console.ReadKey();
         }
         static void Main(string[] args)
         {
